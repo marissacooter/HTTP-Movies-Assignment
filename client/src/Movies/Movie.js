@@ -3,7 +3,6 @@ import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
 import MovieCard from "./MovieCard";
 
-
 function Movie({ addToSavedList }) {
   const [movie, setMovie] = useState(null);
   const params = useParams();
@@ -39,7 +38,7 @@ function Movie({ addToSavedList }) {
         Save
       </div>
 
-      <button onClick={}>Edit</button>
+      <button onClick={handleEdit}>Edit</button>
     </div>
   );
 }

@@ -2,8 +2,7 @@ import React, {useState ,useEffect} from 'react';
 import {useParams, useHistory} from 'react-router-dom';
 import axios from 'axios';
 
-const intialMovie = {
-    id: '',
+const initialMovie = {
     title: '',
     director: '',
     metascore: '',
@@ -12,13 +11,15 @@ const intialMovie = {
 
 const Update = props => {
     const {push} = useHistory();
-    const [movie, setmovie] = useState(initialMovie);
+    const [movie, setMovie] = useState(initialMovie);
     const {id} = useParams();
     useEffect(() => {
+        console.log(id)
         axios
-            .get('http://localhost:5000/api/movies/${id}')
+            .get(`http://localhost:5000/api/movies/${id}`)
             .then(res => {
-                setItem(res.data);
+                console.log(res.data)
+                setMovie(res.data);
             })
             .catch(err => console.log('The data was not returned', err))
     }, [id]);
@@ -26,7 +27,7 @@ const Update = props => {
     const changeHandler = e => {
         e.persist();
        
-        setmovie({
+        setMovie({
             ...movie,
             [e.target.name]: e.target.value
         });
@@ -37,7 +38,7 @@ const Update = props => {
         axios
             .put('http://localhost:5000/api/movies/${id}', movie)
             .then(res => {
-                props.setmovie(res.data);
+                props.getMovieList();
                 push(`/`);
             })
             .catch(err => console.log('The data was not returned', err))
@@ -47,13 +48,6 @@ const Update = props => {
         <div>
             <h2>Update Movie</h2>
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="id"
-                    onChange={changeHandler}
-                    placeholder="id"
-                    value={movie.id}
-                />
                   <input
                     type="text"
                     name="title"
@@ -72,8 +66,8 @@ const Update = props => {
                     type="text"
                     name="metascores"
                     onChange={changeHandler}
-                    placeholder="metascores"
-                    value={movie.metascores}
+                    placeholder="metascore"
+                    value={movie.metascore}
                 />
                   <input
                     type="text"
@@ -82,7 +76,9 @@ const Update = props => {
                     placeholder="stars"
                     value={movie.stars}
                 />
+                <button>
 
+                </button>
             </form>
            
             

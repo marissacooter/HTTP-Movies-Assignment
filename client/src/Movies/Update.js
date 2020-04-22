@@ -14,11 +14,9 @@ const Update = props => {
     const [movie, setMovie] = useState(initialMovie);
     const {id} = useParams();
     useEffect(() => {
-        console.log(id)
         axios
             .get(`http://localhost:5000/api/movies/${id}`)
             .then(res => {
-                console.log(res.data)
                 setMovie(res.data);
             })
             .catch(err => console.log('The data was not returned', err))
@@ -36,7 +34,7 @@ const Update = props => {
     const handleSubmit = e => {
         e.preventDefault();
         axios
-            .put('http://localhost:5000/api/movies/${id}', movie)
+            .put(`http://localhost:5000/api/movies/${id}`, movie)
             .then(res => {
                 props.getMovieList();
                 push(`/`);
@@ -76,15 +74,10 @@ const Update = props => {
                     placeholder="stars"
                     value={movie.stars}
                 />
-                <button>
-
-                </button>
+                <button className="md-button form-button">Update</button>
             </form>
-           
-            
         </div>
     )
 }
-
 
 export default Update;

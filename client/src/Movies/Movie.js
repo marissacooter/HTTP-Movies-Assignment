@@ -38,6 +38,10 @@ function Movie({ addToSavedList }) {
         Save
       </div>
 
+      {/* <div className="delete-button" onClick={deleteMovie}>
+        Delete
+      </div> */}
+
       <button onClick={handleEdit}>Edit</button>
     </div>
   );

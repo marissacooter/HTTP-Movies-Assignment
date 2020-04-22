@@ -24,10 +24,12 @@ const Update = props => {
 
     const changeHandler = e => {
         e.persist();
+
+        let value = e.target.name===`stars` ? e.target.value.split(',') : e.target.value;
        
         setMovie({
             ...movie,
-            [e.target.name]: e.target.value
+            [e.target.name]: value
         });
     };
 
@@ -72,7 +74,7 @@ const Update = props => {
                     name="stars"
                     onChange={changeHandler}
                     placeholder="stars"
-                    value={movie.stars}
+                    value={movie.stars.join(',')}
                 />
                 <button className="md-button form-button">Update</button>
             </form>
